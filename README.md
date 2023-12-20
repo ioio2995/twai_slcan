@@ -1,6 +1,6 @@
 [![ESP CI](https://github.com/ioio2995/twai_slcan/actions/workflows/esp-idf.yml/badge.svg)](https://github.com/ioio2995/twai_slcan/actions/workflows/esp-idf.yml)
 
-# twai_slacn
+# twai_slcan
 ENGLISH 
 ## Introduction
 This repo is based on the work of [cvra/CAN-USB-dongle-fw](https://github.com/cvra/CAN-USB-dongle-fw)
