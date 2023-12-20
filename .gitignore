@@ -1,0 +1,7 @@
+**/build
+/dump*
+/old
+.vscode
+.old
+/managed_components
+sdkconfig*

@@ -1,0 +1,33 @@
+menu "APP - TWAI settings"
+#####################
+#    TWAI CONFIG    #
+#####################
+        
+    config APP_TWAI_TX
+        int "TWAI TX pin"
+        range 0 46
+        default 39
+        help
+            Select Tx pin for twai connection.
+
+    config APP_TWAI_RX
+        int "TWAI RX pin"
+        range 0 46
+        default 38
+        help
+            Select Rx pin for twai connection.           
+
+    config APP_TWAI_TX_TIMEOUT
+        int "TWAI TX timeout"
+        range 0 1000000000
+        default 1000000
+        help
+            Number of FreeRTOS ticks to block on the TX queue.
+
+    config APP_TWAI_RX_TIMEOUT
+        int "TWAI RX timeout"
+        range 0 1000000000
+        default 1000000
+        help
+            Number of FreeRTOS ticks to block on the RX queue.
+endmenu

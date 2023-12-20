@@ -1,0 +1,26 @@
+menu "APP - Led RGB settings"
+    ####################
+    #    RGB CONFIG    #
+    ####################
+            
+        config APP_RGB_RED
+            int "RGB Red pin"
+            range 0 46
+            default 5
+            help
+                Select red pin for RGB connection.
+    
+        config APP_RGB_GREEN
+            int "RGB Green pin"
+            range 0 46
+            default 6
+            help
+                Select green pin for RGB connection.
+    
+        config APP_RGB_BLUE
+            int "RGB Blue pin"
+            range 0 46
+            default 4
+            help
+                Select blue pin for RGB connection.     
+    endmenu
