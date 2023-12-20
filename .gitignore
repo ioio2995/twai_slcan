@@ -2,7 +2,6 @@
 /dump*
 /old
 .vscode
-.old
+*.old
 /managed_components
-sdkconfig*
 dependencies.lock
