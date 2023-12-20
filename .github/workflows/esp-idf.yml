@@ -8,7 +8,7 @@
     # Version of ESP-IDF docker image to use
     esp_idf_version: # optional, default is latest
     # ESP32 variant to build for
-    target:esp32s2 # optional, default is esp32
+    target: esp32s2 # optional, default is esp32
     # Command to run inside the docker container (default: builds the project)
     command: # optional, default is idf.py build
           
