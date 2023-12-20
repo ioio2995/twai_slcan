@@ -38,6 +38,7 @@ idf.py set-target esp32s3
 #"APP - Led RGB settings"
 #Enable : Component config → TinyUSB Stack → Communication Device Class (CDC)
 idf.py menuconfig
+
 # building
 idf.py build
 
