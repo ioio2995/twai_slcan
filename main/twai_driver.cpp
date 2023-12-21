@@ -7,9 +7,27 @@
 
 #define APP_TAG "TWAI_MODULE"
 
+/** \var twai_running
+ *  \brief
+ *       Variable to track the TWAI module state (0: closed, 1: closing, 2: open)
+ */
 int  twai_running = 0;
+
+/** \var t_config
+ *  \brief
+ *       Configuration for CAN Speed
+ */
 static twai_timing_config_t t_config;  // CAN Speed Config
 
+/** \fn can_set_bitrate
+ *  \brief
+ *       Sets the bitrate for the CAN bus
+ * 
+ *  \param bitrate
+ *       Desired bitrate value
+ *  \return
+ *       True if successful, false if the bitrate is not supported
+ */
 bool can_set_bitrate(uint32_t bitrate)
 {
     switch (bitrate)
@@ -48,11 +66,24 @@ bool can_set_bitrate(uint32_t bitrate)
     return true;
 };
 
+/** \fn can_init
+ *  \brief
+ *       Initializes the TWAI module
+ */
 void can_init(void){
         gpio_set_direction(TWAI_VIO, GPIO_MODE_OUTPUT);
         gpio_set_level(TWAI_VIO, 1);
 }
 
+/** \fn can_open
+ *  \brief
+ *       Opens the TWAI channel with the specified mode
+ * 
+ *  \param mode
+ *       CAN mode (CAN_MODE_NORMAL or CAN_MODE_SILENT)
+ *  \return
+ *       True if successful, false otherwise
+ */
 bool can_open(int mode)
 {
     twai_filter_config_t f_config = TWAI_FILTER_CONFIG_ACCEPT_ALL();
@@ -98,6 +129,13 @@ bool can_open(int mode)
     return false;
 };
 
+/** \fn can_close
+ *  \brief
+ *       Closes the TWAI channel
+ * 
+ *  \return
+ *       True if successful, false otherwise
+ */
 bool can_close(void)
 {
     if (twai_running != 0)
@@ -130,6 +168,13 @@ bool can_close(void)
     return false;
 };
 
+/** \fn can_getStatus
+ *  \brief
+ *       Retrieves the status information of the TWAI module
+ * 
+ *  \return
+ *       Status information structure
+ */
 twai_status_info_t can_getStatus()
 {
     twai_status_info_t status;
@@ -137,18 +182,41 @@ twai_status_info_t can_getStatus()
     return status;
 }
 
+/** \fn can_errorRX
+ *  \brief
+ *       Retrieves the number of receive errors on the CAN bus
+ * 
+ *  \return
+ *       Number of receive errors
+ */
 uint32_t can_errorRX()
 {
     twai_status_info_t status = can_getStatus();
     return status.rx_error_counter;
 }
 
+/** \fn can_errorTX
+ *  \brief
+ *       Retrieves the number of transmit errors on the CAN bus
+ * 
+ *  \return
+ *       Number of transmit errors
+ */
 uint32_t can_errorTX()
 {
     twai_status_info_t status = can_getStatus();
     return status.tx_error_counter;
 }
 
+/** \fn can_state
+ *  \brief
+ *       Retrieves the state flags of the TWAI module
+ * 
+ *  \param states
+ *       Pointer to the structure to store state flags
+ *  \return
+ *       True if successful, false otherwise
+ */
 bool can_state(struct can_statusFlags * states)
 {
     uint32_t alerts;
@@ -166,7 +234,15 @@ bool can_state(struct can_statusFlags * states)
     return false;
 }
 
-
+/** \fn can_receive
+ *  \brief
+ *       Receives a CAN frame from the TWAI module
+ * 
+ *  \param frame
+ *       Pointer to the structure to store the received CAN frame
+ *  \return
+ *       True if successful, false otherwise
+ */
 bool can_receive(struct can_frame_s * frame)
 {
    //ToDo Timestamp 
@@ -183,6 +259,15 @@ bool can_receive(struct can_frame_s * frame)
     return false;
 };
 
+/** \fn can_send
+ *  \brief
+ *       Transmits a CAN frame using the TWAI module
+ * 
+ *  \param frame
+ *       Pointer to the CAN frame to be transmitted
+ *  \return
+ *       True if successful, false otherwise
+ */
 bool can_send(struct can_frame_s * frame)
 {
     twai_message_t tx_frame;

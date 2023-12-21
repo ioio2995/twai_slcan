@@ -7,7 +7,15 @@
 
 #define APP_TAG "CDC_MODULE"
 
-
+/** \fn tinyusb_cdc_rx_callback
+ *  \brief
+ *       Callback function for CDC data reception
+ * 
+ *  \param itf
+ *       CDC interface
+ *  \param event
+ *       Event of the cdcacm_event_t struct
+ */
 void tinyusb_cdc_rx_callback(int itf, cdcacm_event_t *event)
 {
     /* initialization */
@@ -44,6 +52,18 @@ void tinyusb_cdc_rx_callback(int itf, cdcacm_event_t *event)
     }
 }
 
+
+/** \fn tinyusb_cdc_write
+ *  \brief
+ *       CDC write function
+ * 
+ *  \param itf
+ *       CDC interface
+ *  \param buf
+ *       Data buffer to write
+ *  \param len
+ *       Length of data to write
+ */
 void tinyusb_cdc_write(int itf, const char* buf, size_t len)
 {
     for (int i = 0; i < len; i++) {
@@ -52,6 +72,15 @@ void tinyusb_cdc_write(int itf, const char* buf, size_t len)
     tinyusb_cdcacm_write_flush((tinyusb_cdcacm_itf_t)itf, 0);
 }
 
+/** \fn tinyusb_cdc_line_state_changed_callback
+ *  \brief
+ *       Callback function for CDC line state changes
+ * 
+ *  \param itf
+ *       CDC interface
+ *  \param event
+ *       Event of the cdcacm_event_t class
+ */
 void tinyusb_cdc_line_state_changed_callback(int itf, cdcacm_event_t *event)
 {
     int dtr = event->line_state_changed_data.dtr;
@@ -59,6 +88,13 @@ void tinyusb_cdc_line_state_changed_callback(int itf, cdcacm_event_t *event)
     ESP_LOGI(APP_TAG, "Line state changed on channel %d: DTR:%d, RTS:%d", itf, dtr, rts);
 }
 
+/** \fn tinyusb_cdc_init
+ *  \brief
+ *       CDC initialization
+ * 
+ *  \param itf
+ *       CDC interface
+ */
 void tinyusb_cdc_init(int itf)
 {
 ESP_LOGI(APP_TAG, "USB initialization");

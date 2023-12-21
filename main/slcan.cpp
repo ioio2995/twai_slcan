@@ -19,20 +19,45 @@ LEDRGB LRGB(LEDRGB_RED,
             LEDRGB_GREEN,
             LEDRGB_BLUE);
 
-/** wirtes a NULL terminated ACK response */
+/** \fn slcan_ack
+ *  \brief
+ *       Writes a NULL terminated ACK response
+ * 
+ *  \param buf
+ *       Pointer to the buffer to store the ACK response
+ */
 static void slcan_ack(char *buf)
 {
     *buf++ = CR; // CR
     *buf = 0;
 }
 
-/** wirtes a NULL terminated NACK response */
+/** \fn slcan_nack
+ *  \brief
+ *       Writes a NULL terminated NACK response
+ * 
+ *  \param buf
+ *       Pointer to the buffer to store the NACK response
+ */
 static void slcan_nack(char *buf)
 {
     *buf++ = BELL; // BELL
     *buf = 0;
 }
 
+/** \fn slcan_frame_to_ascii
+ *  \brief
+ *       Converts a CAN frame to ASCII representation
+ * 
+ *  \param buf
+ *       Pointer to the buffer to store the ASCII representation
+ *  \param f
+ *       Pointer to the CAN frame
+ *  \param timestamp
+ *       Flag indicating whether to include the timestamp in the representation
+ *  \return
+ *       Size of the ASCII representation
+ */
 size_t slcan_frame_to_ascii(char *buf, const struct can_frame_s *f, bool timestamp)
 {
     char *p = buf;
@@ -81,6 +106,13 @@ size_t slcan_frame_to_ascii(char *buf, const struct can_frame_s *f, bool timesta
     return (size_t)(p - buf);
 }
 
+/** \fn slcan_send_frame
+ *  \brief
+ *       Sends a CAN frame based on the provided SLCan line
+ * 
+ *  \param line
+ *       Pointer to the SLCan line
+ */
 void slcan_send_frame(char *line)
 {
     char *out = line;
@@ -133,6 +165,13 @@ void slcan_send_frame(char *line)
     }
 }
 
+/** \fn set_bitrate
+ *  \brief
+ *       Sets the CAN bitrate based on the provided SLCan line
+ * 
+ *  \param line
+ *       Pointer to the SLCan line
+ */
 static void set_bitrate(char *line)
 {
     static const uint32_t br_tbl[10] = {10000, 20000, 50000, 100000, 125000,
@@ -156,6 +195,15 @@ static void set_bitrate(char *line)
     }
 }
 
+/** \fn slcan_open
+ *  \brief
+ *       Opens the CAN channel based on the provided SLCan line
+ * 
+ *  \param line
+ *       Pointer to the SLCan line
+ *  \param mode
+ *       CAN mode (CAN_MODE_NORMAL, CAN_MODE_LOOPBACK, or CAN_MODE_SILENT)
+ */
 static void slcan_open(char *line, int mode)
 {
     if (can_open(mode))
@@ -170,6 +218,13 @@ static void slcan_open(char *line, int mode)
     }
 }
 
+/** \fn slcan_close
+ *  \brief
+ *       Closes the CAN channel based on the provided SLCan line
+ * 
+ *  \param line
+ *       Pointer to the SLCan line
+ */
 static void slcan_close(char *line)
 {
     if (can_close())
@@ -184,6 +239,19 @@ static void slcan_close(char *line)
     }
 }
 
+/** \fn slcan_serial_write
+ *  \brief
+ *       Writes data to the serial interface used by SLCan
+ * 
+ *  \param itf
+ *       Interface index
+ *  \param buf
+ *       Pointer to the data buffer
+ *  \param len
+ *       Length of the data
+ *  \return
+ *       Number of bytes written
+ */
 int slcan_serial_write(int itf, const char *buf, size_t len)
 {
     if (len == 0)
@@ -196,6 +264,13 @@ int slcan_serial_write(int itf, const char *buf, size_t len)
     return ret;
 }
 
+/** \fn slcan_status
+ *  \brief
+ *       Retrieves and sends the status/error flags of the CAN channel
+ * 
+ *  \param line
+ *       Pointer to the SLCan line
+ */
 static void slcan_status(char *line)
 {
 
@@ -215,11 +290,16 @@ static void slcan_status(char *line)
     }
 }
 
-/*
-reference:
-http://www.fischl.de/usbtin/
-http://www.can232.com/docs/canusb_manual.pdf
-*/
+/** \fn slcan_decode_line
+ *  \brief
+ *       Decodes and processes a single SLCan line
+ *       reference:
+ *          http://www.fischl.de/usbtin/
+ *          http://www.can232.com/docs/canusb_manual.pdf
+ * 
+ *  \param line
+ *       Pointer to the SLCan line
+ */
 void slcan_decode_line(char *line)
 {
     switch (*line)
@@ -271,6 +351,13 @@ void slcan_decode_line(char *line)
     };
 }
 
+/** \fn slcan_rx_spin
+ *  \brief
+ *       Task function for handling CAN-to-UART transfer using SLCan protocol
+ * 
+ *  \param arg
+ *       Pointer to the interface index
+ */
 void slcan_rx_spin(void *arg)
 {
     while (1)
