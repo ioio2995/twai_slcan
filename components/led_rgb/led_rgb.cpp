@@ -4,7 +4,15 @@
 #include "led_rgb.hpp"
 #define LED_TASK_PRIO 8
 
-
+/**
+ * @brief Constructor for the LEDRGB class.
+ *
+ * Initializes timers and LEDC channels to control an RGB LED.
+ *
+ * @param LED_RED_PIN   GPIO pin for the red LED.
+ * @param LED_GREEN_PIN GPIO pin for the green LED.
+ * @param LED_BLUE_PIN  GPIO pin for the blue LED.
+ */
 LEDRGB::LEDRGB(int LED_RED_PIN,
                int LED_GREEN_PIN,
                int LED_BLUE_PIN)
@@ -44,6 +52,14 @@ LEDRGB::LEDRGB(int LED_RED_PIN,
     xTaskCreate(LEDPulse, "LED_task",   configMINIMAL_STACK_SIZE + 1024, this, LED_TASK_PRIO + 1, NULL);
 }
 
+/**
+ * @brief Sets the color of the LED based on the specified color parameters.
+ *
+ * Calculates pulse parameters based on color and input value.
+ *
+ * @param color Color specified for the LED.
+ * @param in    Input value for LED pulsation.
+ */
 void LEDRGB::setColor(color_t color, float in)
 {
     float out;
@@ -72,6 +88,13 @@ void LEDRGB::setColor(color_t color, float in)
     ESP_ERROR_CHECK(ledc_update_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_2));
 }
 
+/**
+ * @brief FreeRTOS task for LED pulsation.
+ *
+ * Performs LED pulsation using the passed instance.
+ *
+ * @param pvParameters Task parameters (LEDRGB instance).
+ */
 void LEDRGB::LEDPulse(void *pvParameters)
 {
     // Convert the generic pointer to a pointer of type LEDRGB
