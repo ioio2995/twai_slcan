@@ -15,5 +15,4 @@ else()
     set(GIT_REFERENCE "unknown")
 endif()
 
-# Passez la référence Git à votre code source en tant que définition de préprocesseur
 target_compile_definitions(${COMPONENT_LIB} PRIVATE GIT_REFERENCE="${GIT_REFERENCE}")
