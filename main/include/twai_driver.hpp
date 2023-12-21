@@ -7,8 +7,8 @@
 
 #define TWAI_TX static_cast<gpio_num_t>(CONFIG_APP_TWAI_TX)
 #define TWAI_RX static_cast<gpio_num_t>(CONFIG_APP_TWAI_RX)
-#define TWAI_TX_TIMEOUT  (CONFIG_APP_TWAI_TX_TIMEOUT)
-#define TWAI_RX_TIMEOUT  (CONFIG_APP_TWAI_RX_TIMEOUT)
+#define TWAI_TX_TIMEOUT (CONFIG_APP_TWAI_TX_TIMEOUT)
+#define TWAI_RX_TIMEOUT (CONFIG_APP_TWAI_RX_TIMEOUT)
 #define TWAI_VIO static_cast<gpio_num_t>(42)
 
 
@@ -42,11 +42,11 @@ enum {
 };
 
 /* non-blocking CAN frame receive, NULL if nothing received */
-bool can_receive(can_frame_s * frame);
+bool can_receive(struct can_frame_s * frame);
 
 
 /* blocking CAN frame send */
-bool can_send(can_frame_s * frame);
+bool can_send(struct can_frame_s * frame);
 
 /* returns true on success, must be called before can_open */
 bool can_set_bitrate(uint32_t bitrate);
@@ -58,7 +58,7 @@ void can_init(void);
 
 uint32_t can_errorRX();
 uint32_t can_errorTX();
-bool can_state(can_statusFlags * states);
+bool can_state(struct can_statusFlags * states);
 
 
 #endif // TWAI_DRIVER_H 

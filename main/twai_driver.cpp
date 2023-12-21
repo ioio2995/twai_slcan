@@ -149,7 +149,7 @@ uint32_t can_errorTX()
     return status.tx_error_counter;
 }
 
-bool can_state(can_statusFlags * states)
+bool can_state(struct can_statusFlags * states)
 {
     uint32_t alerts;
     if (twai_read_alerts(&alerts, pdMS_TO_TICKS(100)) == ESP_OK)
@@ -167,7 +167,7 @@ bool can_state(can_statusFlags * states)
 }
 
 
-bool can_receive(can_frame_s * frame)
+bool can_receive(struct can_frame_s * frame)
 {
    //ToDo Timestamp 
     twai_message_t rx_frame;
@@ -183,7 +183,7 @@ bool can_receive(can_frame_s * frame)
     return false;
 };
 
-bool can_send(can_frame_s * frame)
+bool can_send(struct can_frame_s * frame)
 {
     twai_message_t tx_frame;
     tx_frame.identifier = frame->id;

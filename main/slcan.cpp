@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
-#include <string.h>
+#include <cstring>
 #include "freertos/FreeRTOS.h"
 
 #include "esp_log.h"
@@ -84,7 +84,7 @@ size_t slcan_frame_to_ascii(char *buf, const struct can_frame_s *f, bool timesta
 void slcan_send_frame(char *line)
 {
     char *out = line;
-    can_frame_s frame;
+    struct can_frame_s frame;
     frame.remote = false;
     frame.extended = false;
     switch (*line++)
@@ -201,7 +201,7 @@ static void slcan_status(char *line)
 
     if (twai_running != 0)
     {
-        can_statusFlags status_flags;
+        struct can_statusFlags status_flags;
         if (can_state(&status_flags))
         {
             snprintf(line, strlen(line) + 1, "F%02X", *((uint8_t *)&status_flags));
