@@ -13,6 +13,7 @@ sudo modprobe can-raw
 sudo modprobe slcan
 
 # configure CAN interface
+# Use -F for no daemonize
 sudo slcand -f -o -s8 -t hw -S 3000000 ttyACM0 slcan0
 sudo ip link set can1 up
 # info CAN interface
