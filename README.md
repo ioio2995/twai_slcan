@@ -27,7 +27,7 @@ candump slcan0
 ### Prerequisites
 
 Before you can use this project, make sure to install the ESP-IDF framework. 
-[Standard Toolchain Setup for Linux and macOS](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/get-started/linux-macos-setup.html)
+ - [Standard Toolchain Setup for Linux and macOS](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/get-started/linux-macos-setup.html)
 
 ### Building
 
