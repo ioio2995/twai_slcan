@@ -1,0 +1,31 @@
+#
+# APP - TWAI settings
+#
+CONFIG_APP_TWAI_TX=6
+CONFIG_APP_TWAI_RX=8
+CONFIG_APP_TWAI_TX_TIMEOUT=1000000
+CONFIG_APP_TWAI_RX_TIMEOUT=1000000
+# end of APP - TWAI settings
+
+#
+# APP - Led RGB settings
+#
+CONFIG_APP_RGB_RED=36
+CONFIG_APP_RGB_GREEN=37
+CONFIG_APP_RGB_BLUE=35
+# end of APP - Led RGB settings
+
+#
+# Massive Storage Class (MSC)
+#
+# CONFIG_TINYUSB_MSC_ENABLED is not set
+# end of Massive Storage Class (MSC)
+
+#
+# Communication Device Class (CDC)
+#
+CONFIG_TINYUSB_CDC_ENABLED=y
+CONFIG_TINYUSB_CDC_COUNT=1
+CONFIG_TINYUSB_CDC_RX_BUFSIZE=512
+CONFIG_TINYUSB_CDC_TX_BUFSIZE=512
+# end of Communication Device Class (CDC)
