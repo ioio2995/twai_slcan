@@ -6,14 +6,14 @@ menu "APP - TWAI settings"
     config APP_TWAI_TX
         int "TWAI TX pin"
         range 0 46
-        default 39
+        default 6
         help
             Select Tx pin for twai connection.
 
     config APP_TWAI_RX
         int "TWAI RX pin"
         range 0 46
-        default 38
+        default 8
         help
             Select Rx pin for twai connection.           
 
