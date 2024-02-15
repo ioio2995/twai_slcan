@@ -6,10 +6,10 @@
 		"dockerfile": "Dockerfile"
 	},
 	// Add the IDs of extensions you want installed when the container is created
-	"workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/tawin_slcan,type=bind",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/twai_slcan,type=bind",
 	/* the path of workspace folder to be opened after container is running
 	 */
-	 "workspaceFolder": "/workspaces/tawin_slcan",
+	 "workspaceFolder": "/workspaces/twai_slcan",
 	"mounts": [
 		"source=extensionCache,target=/root/.vscode-server/extensions,type=volume"
 	],
