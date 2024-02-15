@@ -53,6 +53,9 @@ idf.py -p /dev/ttyUSB0 flash
 ## Compatibility
  - Linux-can/SocketCAN
 
+## Development
+- [Using VSCode and Docker Container](https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/tutorial/using-docker-container.md)
+
 ## Documentation
 - [LAWICEL CanUSB](http://www.can232.com/docs/canusb_manual.pdf)
 - [USBtin - USB to CAN interface](https://www.fischl.de/usbtin/#socketcan) 
