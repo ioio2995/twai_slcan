@@ -20,7 +20,6 @@ jobs:
       with:
         target: esp32s3
   Deployment:
-  
     runs-on: ubuntu-latest
     needs: Build
     if: github.ref == 'refs/heads/master'
@@ -46,3 +45,4 @@ jobs:
         asset_path: ./twai_sclan.zip
         asset_name: twai_sclan.zip
         asset_content_type: application/zip
+
