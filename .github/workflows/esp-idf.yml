@@ -3,12 +3,12 @@ name: CI
 on:
   push:
     branches: [ "master" ]
+    tags:
+     - 'v*'
   pull_request:
     branches: [ "master" ]
-  tags:
-    - 'v*'
 jobs:
-  build:
+  Build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repo
@@ -19,6 +19,12 @@ jobs:
       uses: espressif/esp-idf-ci-action@v1.1.0
       with:
         target: esp32s3
+  Deployment:
+  
+    runs-on: ubuntu-latest
+    needs: Build
+    if: github.ref == 'refs/heads/master'
+    steps:
     - name: Build binary
       run: |
         zip twai_sclan build/bootloader/bootloader.bin build/partition_table/partition-table.bin build/${{ github.event.repository.name }}.bin
