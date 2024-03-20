@@ -20,3 +20,12 @@ jobs:
       uses: espressif/esp-idf-ci-action@v1.1.0
       with:
         target: esp32s3
+
+    - name: Archive build output artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: build
+        path: |
+          build/bootloader/bootloader.bin
+          build/partition_table/partition-table.bin
+          build/${{ github.event.repository.name }}.bin
