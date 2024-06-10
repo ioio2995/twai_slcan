@@ -2,7 +2,14 @@
 
 # twai_slcan
 ## Introduction
+
 This repo is based on the work of [cvra/CAN-USB-dongle-fw](https://github.com/cvra/CAN-USB-dongle-fw)
+
+## Documentation
+- [LAWICEL CanUSB](http://www.can232.com/docs/canusb_manual.pdf)
+- [USBtin - USB to CAN interface](https://www.fischl.de/usbtin/#socketcan) 
+* [Electronic Schematic](./doc/media/Schematic_USB2TWAI.pdf)
+* [Gerber Files](./doc/media/Gerber_USB2TWAI_PCB_USB2TWA.zip)
 
 ## Usage
 
@@ -56,9 +63,6 @@ idf.py -p /dev/ttyUSB0 flash
 ## Development
 - [Using VSCode and Docker Container](https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/tutorial/using-docker-container.md)
 
-## Documentation
-- [LAWICEL CanUSB](http://www.can232.com/docs/canusb_manual.pdf)
-- [USBtin - USB to CAN interface](https://www.fischl.de/usbtin/#socketcan) 
 ## Done
 - [x] 
 ## Todo
